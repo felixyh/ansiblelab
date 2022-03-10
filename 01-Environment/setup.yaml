@@ -19,6 +19,12 @@
     - name: add footprints
       shell: "ssh-keyscan -H {{ ansible_host }} >> ~/.ssh/known_hosts"
 
+    - name: diable firewall
+      service:
+        name: firewalld
+        state: stopped
+        enabled: false
+
 #
 #   - name: Install python
 #      raw: apt-get update && apt-get install -y python
