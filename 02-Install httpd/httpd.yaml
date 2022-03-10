@@ -1,0 +1,85 @@
+- hosts: web
+  gather_facts: false
+  environment:
+    http_proxy: 10.64.1.81:8080
+    https_proxy: 10.64.1.81:8080
+  tasks:
+#    - name: Installs apache web server
+#      yum:
+#        name: httpd
+#        state: present
+#        update_cache: true
+#
+#    - name: Installs php module
+#      yum:
+#        name: libapache2-mod-php
+#        state: present
+#
+#    - name: Installs git
+#      yum:
+#        name: git
+#        state: present
+
+#    - name: Installs necessary packages
+#      yum:
+#        name: "{{ item }}"
+#        state: latest
+#        update_cache: true
+#      with_items:
+#        - httpd
+#        - php*
+#        - git
+
+
+    - name: Installs necessary packages
+      yum:
+        name:
+          - httpd
+          - php*
+          - git
+        state: latest
+        update_cache: true
+
+#    - name: start httpd
+#      service:
+#        name: httpd
+#        state: started
+#        enabled: true
+
+    - name: Push default virtual host configuration
+      copy:
+        src: files/awesome-app
+        dest: /etc/httpd/conf.d/awesome-app.conf
+        mode: 0640
+
+    - name: Deploy our awesome application
+      git:
+        repo: https://github.com/leucos/ansible-tuto-demosite.git
+        dest: /var/www/awesome-app
+      tags: deploy
+
+    - name: Check that our config is valid
+      command: apachectl configtest
+      register: result
+      ignore_errors: true
+      notify:
+        - restart httpd
+
+    - name: Rolling back - Removing the virtualhost
+      file:
+        path:
+          - /etc/httpd/conf.d/awesome-app.conf
+          - /var/www/awesome-app
+        state: absent
+      when: result is failed
+
+    - name: Rolling back - Ending playbook
+      fail:
+        msg: "Configuration file is not valid. Please  check that before re-running the playbook"
+      when: result is failed
+
+  handlers:
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted

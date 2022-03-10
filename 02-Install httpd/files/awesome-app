@@ -1,0 +1,12 @@
+Listen 8067
+<VirtualHost 192.168.22.67:8067>
+  DocumentRoot /var/www/awesome-app
+  ServerName www.awesomeapp.com
+  ErrorLog /var/log/httpd/error_log
+  CustomLog /var/log/httpd/access_log combined
+  <Directory /var/www/awesome-app>
+    Options -Indexes +FollowSymlinks
+    Require all granted
+    AllowOverride All
+  </Directory>
+</VirtualHost>

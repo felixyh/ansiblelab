@@ -1,0 +1,70 @@
+---
+- hosts: k8s
+  become: true
+  become_user: root
+  remote_user: root
+  gather_facts: false
+
+  tasks:
+    - name: wait for ssh to be up
+      become: false
+      wait_for:
+        port: 22
+        delay: 5
+        connect_timeout: 5
+        timeout: 360
+        host: "{{ ansible_host }}"
+      delegate_to: localhost
+
+    - name: add footprints
+      shell: "ssh-keyscan -H {{ ansible_host }} >> ~/.ssh/known_hosts"
+
+#
+#   - name: Install python
+#      raw: apt-get update && apt-get install -y python
+#
+#    - name: Creates destination directory
+#      file:
+#        state: directory
+#        mode: 0700
+#        dest: /root/.ssh/
+#
+#    - name: pushes user's rsa key to root's virtual machine
+#      copy:
+#        src: ~/.ssh/id_rsa.pub
+#        dest: /root/.ssh/authorized_keys
+#        owner: root
+#        mode: 0600
+#      register: rsa
+#      ignore_errors: true
+#
+#    - name: pushes user's dsa key to root's virtual machine
+#      copy:
+#        src: ~/.ssh/id_dsa.pub
+#        dest: /root/.ssh/authorized_keys
+#        owner: root
+#        mode: 0600
+#      when: rsa is failed
+#
+#    - name: Checks if resolver is working properly (issues with some VBox/Host OS combinations)
+#      command: host -t A ansible.cc
+#      register: ns
+#      ignore_errors: true
+#
+#    - name: Pushes new resolver configuration if resolver fails
+#      lineinfile:
+#        regexp: "^nameserver "
+#        line: "nameserver 8.8.8.8"
+#        dest: /etc/resolv.conf
+#      when: ns is failed
+#
+#    - name: Checks if resolver is working properly with new nameserver
+#      command: host -t A ansible.cc
+#
+#    - name: Final greeting
+#      pause:
+#        seconds: 1
+#        echo: false
+#        prompt: "Don't worry about all the red above; if you made it here, your Vagrant VMs are probably fine !"
+
+

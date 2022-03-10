@@ -1,0 +1,15 @@
+[k8s]
+ansible01 ansible_host=192.168.22.67
+ansible02 ansible_host=192.168.22.68
+ansible03 ansible_host=192.168.22.69
+
+[k8s:vars]
+ansible_ssh_user=root
+
+[k8slab]
+k8s01 ansible_host=192.168.22.61
+k8s02 ansible_host=192.168.22.62
+k8s03 ansible_host=192.168.22.63
+
+[k8slab:vars]
+ansible_ssh_user=root
