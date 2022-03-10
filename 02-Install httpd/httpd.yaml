@@ -1,5 +1,6 @@
 - hosts: web
   gather_facts: false
+  # add global proxy for lab environment to deploy awesomeapp
   environment:
     http_proxy: 10.64.1.81:8080
     https_proxy: 10.64.1.81:8080
