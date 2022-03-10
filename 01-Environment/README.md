@@ -51,12 +51,17 @@ output "vmnameswip" {
 
 ### Create hosts file
 ```buildoutcfg
-[k8s]
+[web]
 ansible01 ansible_host=192.168.22.67
 ansible02 ansible_host=192.168.22.68
+
+[haproxy]
 ansible03 ansible_host=192.168.22.69
 
-[k8s:vars]
+[web:vars]
+ansible_ssh_user=root
+
+[haproxy:vars]
 ansible_ssh_user=root
 ```
 
@@ -75,7 +80,7 @@ host_key_checking=false
 
 ### Upload the key to servers in batch with Ansible module:authorized_key
 ```
-ansible -i 01-Environment/hosts k8s  -m authorized_key -a "user=root key='{{ lookup('file','~/.ssh/id_rsa.pub')}}' path='/root/.ssh/authorized_keys' manage_dir=no" --ask-pass -c paramiko
+ansible -i 01-Environment/hosts all  -m authorized_key -a "user=root key='{{ lookup('file','~/.ssh/id_rsa.pub')}}' path='/root/.ssh/authorized_keys' manage_dir=no" --ask-pass -c paramiko
 #因为密码都一样，所以只需要输入一次密码即可，如果密码不同  需要自定义
  
 #说明：

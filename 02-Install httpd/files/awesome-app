@@ -1,7 +1,7 @@
-Listen 8067
-<VirtualHost 192.168.22.67:8067>
+# Listen 8067
+<VirtualHost *:80>
   DocumentRoot /var/www/awesome-app
-  ServerName www.awesomeapp.com
+  # ServerName www.awesomeapp.com
   ErrorLog /var/log/httpd/error_log
   CustomLog /var/log/httpd/access_log combined
   <Directory /var/www/awesome-app>

@@ -2,5 +2,3 @@
 ansible01 ansible_host=192.168.22.67 ansible_user=root
 ansible02 ansible_host=192.168.22.68 ansible_user=root
 
-[haproxy]
-ansible03 ansible_host=192.168.22.69 ansible_user=root
