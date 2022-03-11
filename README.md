@@ -514,3 +514,21 @@ ansible-playbook -i hosts haproxy.yaml
         state: restarted
 ```
 
+
+
+felix@Felixs-MacBook-Pro 05-Variables % tree
+.
+├── files
+│   └── awesome-app
+├── group_vars
+│   └── haproxy.yaml
+├── haproxy.yaml
+├── host_vars
+│   ├── ansible01.yaml
+│   ├── ansible02.yaml
+│   └── ansible03.yaml
+├── hosts
+├── httpd.yaml
+└── templates
+    └── haproxy.cfg.j2
+
