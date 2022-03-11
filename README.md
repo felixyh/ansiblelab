@@ -16,7 +16,7 @@
 
 Overall topology is like below:
 
-![image-20220311092828023](/Users/felix/Library/Application Support/typora-user-images/image-20220311092828023.png)
+![image-20220311092828023](image-20220311092828023.png)
 
 ## Provision Infra with Terraform and vSphere
 
@@ -277,7 +277,7 @@ Create the virtual host configuration file: awesome-app
 ansible-playbook -i hosts httpd.yaml
 ```
 
-<img src="/Users/felix/Library/Application Support/typora-user-images/image-20220311102203398.png" alt="image-20220311102203398" style="zoom:50%;" />
+![image-20220311102203398](image-20220311102203398.png)
 
 
 
@@ -352,13 +352,13 @@ Create tasks to push template to haproxy server
 ansible-playbook -i hosts httpd.yaml haproxy.yaml
 ```
 
-<img src="/Users/felix/Library/Application Support/typora-user-images/image-20220311102500323.png" alt="image-20220311102500323" style="zoom:50%;" />
+![image-20220311102500323](image-20220311102500323.png)
 
 
 
 Access http://haproxy-IP/haproxy?stats
 
-<img src="/Users/felix/Library/Application Support/typora-user-images/image-20220311102526388.png" alt="image-20220311102526388" style="zoom:50%;" />
+![image-20220311102526388](image-20220311102526388.png)
 
 ## Lab-04
 
