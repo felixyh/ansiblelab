@@ -277,8 +277,7 @@ Create the virtual host configuration file: awesome-app
 ansible-playbook -i hosts httpd.yaml
 ```
 
-![image-20220311102203398](image-20220311102203398.png)
-
+<img src="image-20220311102203398.png" alt="image-20220311102203398" style="zoom:50%;" />
 
 
 ## Lab-03
@@ -352,13 +351,12 @@ Create tasks to push template to haproxy server
 ansible-playbook -i hosts httpd.yaml haproxy.yaml
 ```
 
-![image-20220311102500323](image-20220311102500323.png)
-
-
+<img src="image-20220311102500323.png" alt="image-20220311102500323" style="zoom:50%;" />
 
 Access http://haproxy-IP/haproxy?stats
 
-![image-20220311102526388](image-20220311102526388.png)
+<img src="image-20220311102526388.png" alt="image-20220311102526388" style="zoom:50%;" />
+
 
 ## Lab-04
 
